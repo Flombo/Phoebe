@@ -1,6 +1,6 @@
-package com.example.discordtestbot.listener;
+package com.example.phoebebot.listener;
 
-import com.example.discordtestbot.commands.SlashCommand;
+import com.example.phoebebot.commands.SlashCommand;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
 import org.springframework.stereotype.Component;

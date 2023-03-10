@@ -1,10 +1,10 @@
-package com.example.discordtestbot;
+package com.example.phoebebot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DiscordTestBotApplicationTests {
+class PhoebeBotApplicationTests {
 
     @Test
     void contextLoads() {

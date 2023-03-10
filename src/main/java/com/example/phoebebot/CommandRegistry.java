@@ -1,4 +1,4 @@
-package com.example.discordtestbot;
+package com.example.phoebebot;
 
 import discord4j.common.JacksonResources;
 import discord4j.discordjson.json.ApplicationCommandRequest;
@@ -58,7 +58,7 @@ public class CommandRegistry implements ApplicationRunner {
                     .doOnError(e -> LOGGER.warn("Failed to register global commands"))
                     .subscribe();
         } catch (NullPointerException exception) {
-            LOGGER.warn("applicationID of client is null", client);
+            LOGGER.warn("applicationID of client is null");
         }
         }
 }

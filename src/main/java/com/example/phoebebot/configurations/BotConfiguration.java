@@ -1,4 +1,4 @@
-package com.example.discordtestbot.configurations;
+package com.example.phoebebot.configurations;
 
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;

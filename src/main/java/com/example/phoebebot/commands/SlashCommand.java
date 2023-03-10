@@ -1,4 +1,4 @@
-package com.example.discordtestbot.commands;
+package com.example.phoebebot.commands;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
 import reactor.core.publisher.Mono;
 
