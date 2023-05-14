@@ -35,8 +35,6 @@ public class AnimalCommand implements SlashCommand {
         IReferenceCommandDTO referenceCommandDTO = new ReferenceCommandDTO(commandName, new ArrayList<>());
         IReference animalReference = referenceService.retrieveReference(referenceCommandDTO);
         //Reply to the slash command, with the name the user supplied
-        return  event.reply()
-                .withEphemeral(true)
-                .withEmbeds(referenceMessageBuilder.buildReferenceMessage(animalReference));
+        return referenceMessageBuilder.buildReferenceMessage(event, animalReference);
     }
 }

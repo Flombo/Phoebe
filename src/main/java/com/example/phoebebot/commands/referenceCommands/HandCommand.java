@@ -46,8 +46,6 @@ public class HandCommand implements SlashCommand {
         IReference reference = referenceService.retrieveReference(referenceCommandDTO);
 
         //Reply to the slash command, with the name the user supplied
-        return  event.reply()
-                .withEphemeral(true)
-                .withEmbeds(referenceMessageBuilder.buildReferenceMessage(reference));
+        return referenceMessageBuilder.buildReferenceMessage(event, reference);
     }
 }

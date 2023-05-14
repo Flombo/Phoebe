@@ -36,8 +36,6 @@ public class UrbanCommand implements SlashCommand {
         IReferenceCommandDTO referenceCommandDTO = new ReferenceCommandDTO(this.commandName, new ArrayList<>());
         IReference reference = referenceService.retrieveReference(referenceCommandDTO);
 
-        return  event.reply()
-                .withEphemeral(true)
-                .withEmbeds(referenceMessageBuilder.buildReferenceMessage(reference));
+        return referenceMessageBuilder.buildReferenceMessage(event, reference);
     }
 }

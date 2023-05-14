@@ -1,10 +1,11 @@
 package com.example.phoebebot.messagebuilder;
 
 import com.example.phoebebot.models.IReference;
-import discord4j.core.spec.EmbedCreateSpec;
+import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
+import reactor.core.publisher.Mono;
 
 public interface IReferenceMessageBuilder {
 
-    EmbedCreateSpec buildReferenceMessage(IReference reference);
+    Mono<Void> buildReferenceMessage(ChatInputInteractionEvent event, IReference reference);
 
 }
