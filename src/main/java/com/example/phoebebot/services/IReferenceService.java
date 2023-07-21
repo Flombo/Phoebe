@@ -7,4 +7,6 @@ public interface IReferenceService {
 
     IReference retrieveReference(IReferenceCommandDTO referenceCommandDTO);
 
+    IReferenceService mirrorVertically(IReferenceCommandDTO referenceCommandDTO, String url);
+
 }

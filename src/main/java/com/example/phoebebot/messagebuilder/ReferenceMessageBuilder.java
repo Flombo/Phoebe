@@ -1,9 +1,8 @@
 package com.example.phoebebot.messagebuilder;
 
-import com.example.phoebebot.CommandRegistry;
 import com.example.phoebebot.models.IReference;
 import discord4j.common.JacksonResources;
-import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
+import discord4j.core.event.domain.interaction.InteractionCreateEvent;
 import discord4j.core.object.component.ActionRow;
 import discord4j.core.object.component.Button;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -23,10 +22,11 @@ import java.util.List;
 @Component
 public class ReferenceMessageBuilder implements IReferenceMessageBuilder {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(CommandRegistry.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ReferenceMessageBuilder.class);
+    private final List<Button> buttons = new ArrayList<>();
 
     @Override
-    public Mono<Void> buildReferenceMessage(ChatInputInteractionEvent event, IReference reference) {
+    public Mono<Void> buildReferenceMessage(InteractionCreateEvent event, IReference reference) {
         return event.reply()
                 .withEphemeral(true)
                 .withEmbeds(buildEmbedCreateSpec(reference))
@@ -49,19 +49,19 @@ public class ReferenceMessageBuilder implements IReferenceMessageBuilder {
 
     private ActionRow buildReferenceActionRow() {
 
-        List<Button> buttons = new ArrayList<>();
+        if(this.buttons.isEmpty()) {
+            try {
+                final PathMatchingResourcePatternResolver pathResolver = new PathMatchingResourcePatternResolver();
+                final JacksonResources d4jMapper = JacksonResources.create();
 
-        try {
-            final PathMatchingResourcePatternResolver pathResolver = new PathMatchingResourcePatternResolver();
-            final JacksonResources d4jMapper = JacksonResources.create();
-
-            for (Resource resource : pathResolver.getResources("referenceButtons/*.json")) {
-                ReferenceButton referenceButton = d4jMapper.getObjectMapper()
-                        .readValue(resource.getInputStream(), ReferenceButton.class);
-                buttons.add(referenceButton.getButton());
+                for (Resource resource : pathResolver.getResources("referenceButtons/*.json")) {
+                    ReferenceButton referenceButton = d4jMapper.getObjectMapper()
+                            .readValue(resource.getInputStream(), ReferenceButton.class);
+                    buttons.add(referenceButton.getButton());
+                }
+            } catch (IOException exception) {
+                LOGGER.warn("Failed to initialize reference buttons due to: " + exception.getMessage());
             }
-        } catch (IOException exception) {
-            LOGGER.warn("Failed to initialize reference buttons due to: " + exception.getMessage());
         }
 
         return ActionRow.of(buttons);

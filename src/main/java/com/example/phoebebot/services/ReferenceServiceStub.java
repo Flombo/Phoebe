@@ -38,6 +38,11 @@ public class ReferenceServiceStub implements IReferenceService {
         return new Reference(referenceCommandDTO, Platforms.Quickposes, "https://quickposes.com/en", "https://quickposes.com/apple-touch-icon.png", "Herbert", url, "", 100, 100);
     }
 
+    @Override
+    public IReferenceService mirrorVertically(IReferenceCommandDTO referenceCommandDTO, String url) {
+        return null;
+    }
+
     private String retrievePoseUrl(List<String> options) {
         String url = "";
         String[] femalePoses = new String[] {
